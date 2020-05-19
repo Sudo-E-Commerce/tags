@@ -85,9 +85,21 @@ class TagServiceProvider extends ServiceProvider
     public function publish()
     {
         if ($this->app->runningInConsole()) {
-            $this->publishes([
-                
-            ], 'sudo/tag');
+            $assets = [
+                //
+            ];
+            $config = [
+                //
+            ];
+            $all = array_merge($assets, $config);
+            // Chạy riêng
+            $this->publishes($all, 'sudo/tag');
+            $this->publishes($assets, 'sudo/tag/assets');
+            $this->publishes($config, 'sudo/tag/config');
+            // Khởi chạy chung theo core
+            $this->publishes($all, 'sudo/core');
+            $this->publishes($assets, 'sudo/core/assets');
+            $this->publishes($config, 'sudo/core/config');
         }
     }
 
