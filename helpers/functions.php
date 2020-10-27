@@ -11,7 +11,7 @@ function tags($tags, $tag_table, $tag_table_id) {
     \Sudo\Tag\Models\TagMap::where('tag_table', $tag_table)->where('tag_table_id', $tag_table_id)->delete();
     foreach ($tags as $tag) {
         // Định dạng lại tên tags
-        $tag = ucfirst(strtolower(trim($tag)));
+        $tag = ucfirst(mb_strtolower(trim($tag)));
         // Nếu tên tags không trống thì sử lý tiếp
         if (!empty($tag)) {
             $check_exists = \Sudo\Tag\Models\Tag::where('slug', str_slug($tag))->first();
