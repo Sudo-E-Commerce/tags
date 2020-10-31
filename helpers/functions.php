@@ -32,6 +32,10 @@ function tags($tags, $tag_table, $tag_table_id) {
                 ]);
             } else {
                 $tag_id = $check_exists->id;
+                \Sudo\Tag\Models\Tag::where('id', $tag_id)->update([
+                    'name'          => $tag,
+                    'updated_at'    => date('Y-m-d H:i:s'),
+                ]);
             }
             \Sudo\Tag\Models\TagMap::insert([
                 'tag_table'         => $tag_table,
